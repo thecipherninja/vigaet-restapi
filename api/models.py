@@ -2,6 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+class VideoElement(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    type = models.CharField(max_length=20)
+    audio_id = models.CharField(max_length=255)
+    url = models.URLField()
+    duration_start_time = models.IntegerField()
+    duration_end_time = models.IntegerField()
+
 class AudioElement(models.Model):
     AUDIO_TYPES = (
         ('vo', 'Voice Over'),
@@ -18,19 +26,11 @@ class AudioElement(models.Model):
     duration_end_time = models.IntegerField(null=True, blank=True)
     url = models.URLField(null=True, blank=True)
 
-class VideoElement(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    type = models.CharField(max_length=20)
-    audio_id = models.CharField(max_length=255)
-    url = models.URLField()
-    duration_start_time = models.FloatField()
-    duration_end_time = models.FloatField()
-
 class AudioFragments(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     url = models.URLField(null=True, blank=True)
     type = models.CharField(max_length=20)
     volume = models.IntegerField()
-    duration_start_time = models.FloatField()
-    duration_end_time = models.FloatField()
+    duration_start_time = models.IntegerField()
+    duration_end_time = models.IntegerField()
 
