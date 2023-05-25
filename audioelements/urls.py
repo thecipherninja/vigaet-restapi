@@ -16,9 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .router import router
+from rest_framework import routers
+from api.views import VideoBlockViewSet, AudioBlockViewSet
+from api.views import AudioElementsViewSet
+
+
+router = routers.DefaultRouter()
+router.register(r'video_blocks', VideoBlockViewSet)
+router.register(r'audio_blocks', AudioBlockViewSet)
+# router.register(r'audio_elements', AudioElementsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
+    path('api/merged-data/<str:id>/', AudioElementsViewSet.as_view(), name='merged-data-detail'),
 ]
+
